@@ -8,14 +8,9 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Easy to Use',
+    title: 'React Hooks',
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
-    description: (
-      <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
-      </>
-    ),
+    description: <>React Tutorial with Hooks for Intermediate Levels</>,
   },
   {
     title: 'Focus on What Matters',
@@ -69,7 +64,7 @@ function Home() {
             <Link
               className={clsx(
                 'button button--outline button--secondary button--lg',
-                styles.getStarted,
+                styles.getStarted
               )}
               to={useBaseUrl('docs/')}>
               Get Started

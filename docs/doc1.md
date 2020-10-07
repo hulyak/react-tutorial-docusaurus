@@ -1,203 +1,114 @@
 ---
-id: doc1
-title: Style Guide
-sidebar_label: Style Guide
+id: tutorial
+title: Getting Started
 slug: /
 ---
 
-You can write content using [GitHub-flavored Markdown syntax](https://github.github.com/gfm/).
+In this tutorial, we will create a React Weather App, and use the React's latests hooks. At the end of this tutorial, you will have the knowledge about React's most common hooks and how to create a custom hook.
+You can check out the application that we will create in this tutorial.
 
-## Markdown Syntax
+#### Prerequisites
 
-To serve as an example page when styling markdown based Docusaurus sites.
+- Comfortable with Html
+- Javascript, ES6 to see what is React and what is Javascript
+- Basic React knowledge like props, components, one way-data-flow
 
-## Headers
+### What we will cover
 
-# H1 - Create the best documentation
+- Using state and useState
+- fetching an API with useEffect
+- use of custom hooks in our application
 
-## H2 - Create the best documentation
+**By the end of the tutorial, you will have the following skill sets:**
 
-### H3 - Create the best documentation
+Hands-on practical and real-life scenario of creating Weather Application using React Hooks
 
-#### H4 - Create the best documentation
+## What Are React Hooks?
 
-##### H5 - Create the best documentation
+Hooks are a new addition in React 16.8. With the help of hooks, we can use state and other React features without writing a class.
 
-###### H6 - Create the best documentation
+Before Hooks, we would need to understand how **this** keyword works in Javascript, and to remember to bind event handlers in class components.
+There wasn't a particular way to reuse stateful component logic and this made the code harder to follow.
 
----
+We needed to share stateful logic in a better way. React is designed to render components, and it doesn't know anything about routing, fetching data or architecture of our project.
 
-## Emphasis
+Hooks allow for attaching reusable logic to an existing component and use state and lifecycle methods inside a React functional component.
+We can organize the logic inside a component into reusable isolated units. Hooks give developers the opportunity to separate **presentation logic**, logic that is associated with how components appear on a page, from **business logic**, logic that is associated with handling, manipulating, and storing business objects.
 
-Emphasis, aka italics, with *asterisks* or _underscores_.
+There are some **rules** about how to use hooks. Following rules are:
 
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
+- only call hooks at the top level of the component
+- don't call hooks inside loops, conditionals, or nested functions
+- only call hooks from React functions
+- call them from within React functional components and not just any regular Javascript function
 
-Combined emphasis with **asterisks and _underscores_**.
+Okay, now let's start working with our application.
 
-Strikethrough uses two tildes. ~~Scratch this.~~
+### Application Tools
 
----
+- [x] Install [NodeJS](https://nodejs.org/en/) and make sure it is the LTS(long term support) version. LTS version is less stable version of NodeJS. We will use NPM (node package manager) and we will us it to install **create-react-app**.
+      ![nodejs](../static/img/node.png)
+- [x] Install your preferred code editor or IDE. I will be using Visual Studio Code. You can download from [this website](https://code.visualstudio.com/). It is free to use.
+      ![vscode](../static/img/vscode.png)
+- [x] **create-react-app** is an npm package which we can bootstrap our React application without any configuration.
+      ![create-react-app-github](../static/img/cra.png)
 
-## Lists
+Let's install our project. Open up your terminal and `cd` into the directory you want to create the project.
 
-1. First ordered list item
-1. Another item
-   - Unordered sub-list.
-1. Actual numbers don't matter, just that it's a number
-   1. Ordered sub-list
-1. And another item.
+```bash
+cd desktop
+# type this command to install create-react-app, you can give any name for the app.
+npx create-react-app weather-app
+```
 
-* Unordered list can use asterisks
+Now, let's wait for the project to be created, now all the packages are installed for us to use it.
 
-- Or minuses
+![terminal](../static/img/terminal.png)
 
-+ Or pluses
+Let's go inside our project folder, type the name of our project and `cd` into it.
 
----
+```bash
+cd weather-app
+# open the project files with Visual Studio or any code editor
 
-## Links
+#start the app
+npm start
+```
 
-[I'm an inline-style link](https://www.google.com/)
+![app](../static/img/app.png)
 
-[I'm an inline-style link with title](https://www.google.com/ "Google's Homepage")
+Now we can see our app is up and running. Before starting our app, let's make some cleanup and remove some of the files that we will not use.
 
-[I'm a reference-style link][arbitrary case-insensitive reference text]
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-URLs and URLs in angle brackets will automatically get turned into links. http://www.example.com/ or <http://www.example.com/> and sometimes example.com (but not on GitHub, for example).
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org/
-[1]: http://slashdot.org/
-[link text itself]: http://www.reddit.com/
-
----
-
-## Images
-
-Here's our logo (hover to see the title text):
-
-Inline-style: ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 1')
-
-Reference-style: ![alt text][logo]
-
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 2'
-
-Images from any folder can be used by providing path to file. Path should be relative to markdown file.
-
-![img](../static/img/logo.svg)
-
----
-
-## Code
+Let's remove `App.css, App.test.js, index.css, logo.svg, setupTests.js` from source folder. You can copy and paste the basic structure for App.js and index.js from the code snippets below.
 
 ```javascript
-var s = 'JavaScript syntax highlighting';
-alert(s);
-```
+// App.js
 
-```python
-s = "Python syntax highlighting"
-print(s)
-```
+import React from 'react';
 
-```
-No language indicated, so no syntax highlighting.
-But let's throw in a <b>tag</b>.
-```
-
-```js {2}
-function highlightMe() {
-  console.log('This line can be highlighted!');
+function App() {
+  return <div className="App"></div>;
 }
+
+export default App;
 ```
 
----
+```javascript
+// index.js
 
-## Tables
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
 
-Colons can be used to align columns.
+ReactDOM.render(<App />, document.getElementById('root'));
 
-| Tables        |      Are      |   Cool |
-| ------------- | :-----------: | -----: |
-| col 3 is      | right-aligned | \$1600 |
-| col 2 is      |   centered    |   \$12 |
-| zebra stripes |   are neat    |    \$1 |
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+```
 
-There must be at least 3 dashes separating each header cell. The outer pipes (|) are optional, and you don't need to make the raw Markdown line up prettily. You can also use inline Markdown.
+Also, we can remove `logo` files from `public` folder, now my files are looking like this:
 
-| Markdown | Less      | Pretty     |
-| -------- | --------- | ---------- |
-| _Still_  | `renders` | **nicely** |
-| 1        | 2         | 3          |
-
----
-
-## Blockquotes
-
-> Blockquotes are very handy in email to emulate reply text. This line is part of the same quote.
-
-Quote break.
-
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can _put_ **Markdown** into a blockquote.
-
----
-
-## Inline HTML
-
-<dl>
-  <dt>Definition list</dt>
-  <dd>Is something people use sometimes.</dd>
-
-  <dt>Markdown in HTML</dt>
-  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
-</dl>
-
----
-
-## Line Breaks
-
-Here's a line for us to start with.
-
-This line is separated from the one above by two newlines, so it will be a _separate paragraph_.
-
-This line is also a separate paragraph, but... This line is only separated by a single newline, so it's a separate line in the _same paragraph_.
-
----
-
-## Admonitions
-
-:::note
-
-This is a note
-
-:::
-
-:::tip
-
-This is a tip
-
-:::
-
-:::important
-
-This is important
-
-:::
-
-:::caution
-
-This is a caution
-
-:::
-
-:::warning
-
-This is a warning
-
-:::
+![img](../static/img/fs.png)
