@@ -1,6 +1,12 @@
 module.exports = {
   someSidebar: {
-    'React Tutorial': ['tutorial', 'doc2', 'doc3'],
+    'React Tutorial': [
+      'tutorial',
+      'api',
+      'components',
+      'useState Hook',
+      'useEffect Hook',
+    ],
     Features: ['mdx'],
   },
 };
