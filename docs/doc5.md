@@ -92,7 +92,7 @@ const CitySelector = () => {
             placeholder="Enter city"
             onChange={(event) => setCity(event.target.value)}
             value={city}
-            onKeyDown={onKeyDown}
+
           />
         </Col>
       </Row>
@@ -102,83 +102,7 @@ const CitySelector = () => {
           <Button onClick={onSearch}>Check Weather</Button>
         </Col>
       </Row>
-
-      {renderResults}
     </>
   );
 };
 ```
-
-## Custom Hooks for Search
-
-Create a new folder under `src`, then create a new file named `useFetch.js`
-
-```javascript
-import {useState, useEffect} from 'react';
-
-const useFetch = (url) => {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        setIsLoading(false);
-        setData(data);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        setError(error);
-      });
-  });
-
-  return {data, error, isLoading};
-};
-
-export default useFetch;
-```
-
-Now, let's import this into our `App.js` component, and pass our custom hook.
-
-`import UseFetch from '../hooks/useFetch';`
-
-We need to call the Api, every time the button is clicked.
-
-```javascript
-import React from 'react';
-import CitySelector from './components/CitySelector';
-import './App.css';
-import {Container} from 'react-bootstrap';
-
-import {API_KEY, baseUrl} from './apis/config';
-import UseFetch from './hooks/useFetch';
-
-const App = () => {
-  const {data, error, isLoading, setUrl} = UseFetch();
-  // print the results
-  console.log(data);
-
-  return (
-    <Container className="App">
-      <CitySelector
-        onSelectButtonClick={(city) =>
-          setUrl(`${baseUrl}/data/2.5/forecast?q=${city}&appid=${API_KEY}`)
-        }
-      />
-    </Container>
-  );
-};
-
-export default App;
-```
-
-It prints multiple times, because we have different setters inside our custom hook.
-
-![img](../static/img/app1.png)
-
-## Populate the Data
-
-Now, populate the data abd show 5 day's weather data. Create another component. Under components folder, create `WeatherList.js` component

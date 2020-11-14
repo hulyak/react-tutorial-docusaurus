@@ -6,6 +6,7 @@ module.exports = {
       'components',
       'useState Hook',
       'useEffect Hook',
+      'custom hook'
     ],
     Features: ['mdx'],
   },
